@@ -1,16 +1,24 @@
 import React from 'react'
-//import "./ Sidebar.css";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import "./Sidebar.css";
+
 
  function Sidebar() {
   return (
     <div className="sidebar">
-        <h2>Sidebar</h2>
-
         <div className="sidebar__top">
             <h3>TEST room_name</h3>
-            <ExpandMoreIcon/>
+            [/*ArrowDropDownIcon*/]
         </div>
+        <div className="sidebar__channels">
+          <div className="sidebar__channelHeader">
+            <div className="sidebar_header">
+            [/*ArrowDropDownIcon*/]
+            <h4>TEXT channels</h4>
+          </div>
+
+          <AddIcon className="sidebar__addChannel"/>
+        </div>
+      </div>
     </div>
   );
 }
