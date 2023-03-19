@@ -1,5 +1,9 @@
 import React from 'react'
 import "./Sidebar.css";
+import SidebarChannel from './SidebarChannel';
+import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import CallIcon from '@mui/icons-material/Call';
 
 
  function Sidebar() {
@@ -16,8 +20,30 @@ import "./Sidebar.css";
             <h4>TEXT channels</h4>
           </div>
 
-          <AddIcon className="sidebar__addChannel"/>
+          [/*AddIcon className="sidebar__addChannel"*/]
         </div>
+      
+
+      <div className="sidebar__channelsList">
+            <SidebarChannel />
+            <SidebarChannel />
+            <SidebarChannel />
+            <SidebarChannel />
+        </div>
+      </div>
+
+      <div className="sidebar__voice">
+       
+        <div className="sidebar_voiceInfo">
+          <h3>voice connected</h3>
+          <p>Stream</p>
+        </div>
+
+      <div className="sidebar__voiceIcons">
+        [/*InfoOutlinedIcon*/]
+        [*/CallIcon*/]
+      </div>
+
       </div>
     </div>
   );
