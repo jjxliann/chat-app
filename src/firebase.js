@@ -1,4 +1,10 @@
-import firebase from 'firebase';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, } from 'firebase/firestore/lite';
+import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+
+
+
 
 
 const firebaseConfig = {
@@ -12,10 +18,11 @@ const firebaseConfig = {
   };
 
 
-  const firebaseApp = firebase.initalizeApp(firebaseConfig);
-  const db = firebaseApp.firestore();
-  const auth = firebase.auth();
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth();
+  auth.languageCode = 'it';
+  const provider = new GoogleAuthProvider();
 
   export{auth, provider};
   export default db;
