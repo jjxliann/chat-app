@@ -4,6 +4,7 @@ import ChatHeader from './ChatHeader'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GifIcon from '@mui/icons-material/Gif';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import Message from './Message';
 
 function Chat() {
   return (
