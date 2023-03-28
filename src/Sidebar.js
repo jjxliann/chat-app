@@ -19,7 +19,7 @@ import { collection, query, onSnapshot } from "firebase/firestore";
   const [channels, setChannels] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "channel"));
+    const q = query(collection(db, "channels"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setChannels(
         snapshot.docs.map((doc) =>({
@@ -30,6 +30,16 @@ import { collection, query, onSnapshot } from "firebase/firestore";
     }
     );
   }, []);
+
+  const handleAddChannel = () =>{
+      const channelName = prompt("Name your channel");
+
+      if(channelName) {
+        db.collection("channels").add({
+          channelName: channelName,
+        });
+      }
+  };
 
   return (
     <div className="sidebar">
@@ -45,14 +55,14 @@ import { collection, query, onSnapshot } from "firebase/firestore";
             <h4>TEXT channels</h4>
           </div>
 
-          <AddIcon className="sidebar__addChannel"/>
+          <AddIcon onClick={handleAddChannel} className="sidebar__addChannel"/>
         </div>
         
       
 
       <div className="sidebar__channelsList">
         {channels.map((channel) =>(
-        <SidebarChannel/>
+          <SidebarChannel/>
         ))}
         </div>
       </div>
