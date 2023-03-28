@@ -3,13 +3,13 @@ import './ChatHeader.css'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
-function ChatHeader() {
+function ChatHeader({channelName}) {
   return (
     <div className="chatHeader">
         <div className="chatHeader__left">
             <h3>
                 <span className="chatHeader__hash">#</span>
-                test channel name
+                {channelName}
             </h3>
         </div>
 
