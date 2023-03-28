@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Sidebar.css";
 import SidebarChannel from './SidebarChannel';
 import CallIcon from '@mui/icons-material/Call';
@@ -10,11 +10,27 @@ import { Avatar } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
-import {auth} from "./firebase";
+import db, {auth} from "./firebase"
+import { collection, query, onSnapshot } from "firebase/firestore";
 
 
  function Sidebar() {
   const user = useSelector(selectUser);
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "channel"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      setChannels(
+        snapshot.docs.map((doc) =>({
+        id: doc.id,
+        channel: doc.data(),
+        }))
+      )
+    }
+    );
+  }, []);
+
   return (
     <div className="sidebar">
         <div className="sidebar__top">
@@ -35,10 +51,9 @@ import {auth} from "./firebase";
       
 
       <div className="sidebar__channelsList">
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
-            <SidebarChannel />
+        {channels.map((channel) =>(
+        <SidebarChannel/>
+        ))}
         </div>
       </div>
 
@@ -56,7 +71,7 @@ import {auth} from "./firebase";
        </div>
       </div>
 
-      <div className="sidebar__profile">
+      <div className='sidebar__profile'>
         <Avatar onClick= {() => auth.signOut()} src={user.photo}/>
         <div className="sidebar__profileInfo">
           <h3>{user.displayName}</h3>
