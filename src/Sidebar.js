@@ -11,7 +11,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useSelector } from 'react-redux';
 import { selectUser } from './features/userSlice';
 import db, {auth} from "./firebase"
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot,addDoc } from "firebase/firestore";
+
 
 
  function Sidebar() {
@@ -35,9 +36,12 @@ import { collection, query, onSnapshot } from "firebase/firestore";
       const channelName = prompt("Name your channel");
 
       if(channelName) {
-        db.collection("channels").add({
+
+        const docRef =  addDoc(collection(db, "channels"), {
           channelName: channelName,
         });
+
+       
       }
   };
 
@@ -61,8 +65,8 @@ import { collection, query, onSnapshot } from "firebase/firestore";
       
 
       <div className="sidebar__channelsList">
-        {channels.map((channel) =>(
-          <SidebarChannel/>
+        {channels.map(({id, channel}) =>(
+          <SidebarChannel key={id} id = {id} channelName={channel.channelName} />
         ))}
         </div>
       </div>
