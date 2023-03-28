@@ -2,7 +2,7 @@ import React from 'react'
 import './Login.css';
 import {Button} from "@mui/material"
 import { auth } from "./firebase";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 
 

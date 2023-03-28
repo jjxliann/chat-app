@@ -8,9 +8,13 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import { Avatar } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useSelector } from 'react-redux';
+import { selectUser } from './features/userSlice';
+import {auth} from "./firebase";
 
 
  function Sidebar() {
+  const user = useSelector(selectUser);
   return (
     <div className="sidebar">
         <div className="sidebar__top">
@@ -53,10 +57,10 @@ import SettingsIcon from '@mui/icons-material/Settings';
       </div>
 
       <div className="sidebar__profile">
-        <Avatar src= "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.reddit.com%2Fr%2FWorldOfWarships%2Fcomments%2Fc3rqg3%2Fsaw_this_meme_in_yuro_vids_who_that_and_what_tgat%2F&psig=AOvVaw0HuPgvXvgBF3mfVfos2sGm&ust=1679479083781000&source=images&cd=vfe&ved=https://www.google.com/url?sa=i&url=https%3A%2F%2Flanguagelog.ldc.upenn.edu%2Fnll%2F%3Fp%3D27154&psig=AOvVaw0HuPgvXvgBF3mfVfos2sGm&ust=1679479083781000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCNj9iqTh7P0CFQAAAAAdAAAAABA3"/>
+        <Avatar onClick= {() => auth.signOut()} src={user.photo}/>
         <div className="sidebar__profileInfo">
-          <h3>@name</h3>
-          <p>thisistest</p>
+          <h3>{user.displayName}</h3>
+          <p>#{user.uid}</p>
         </div>
         <div className="sidebar__profileIcons">
           <SettingsIcon/> 
