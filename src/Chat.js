@@ -8,7 +8,7 @@ import Message from './Message';
 import { useSelector } from 'react-redux';
 import { selectChannelId, selectChannelName } from './features/appSlice';
 import { selectUser } from './features/userSlice';
-import {doc, getDocs} from "firebase/firestore";
+import {doc, getDoc, getDocs, onSnapshot} from "firebase/firestore";
 import { query, orderBy,collection } from "firebase/firestore";  
 import db from './firebase';
 import firebase from './firebase';
@@ -26,13 +26,15 @@ function Chat() {
     useEffect(() =>{
       if(channelId){
 
-        db.
-
       
-const ordersRef = collection(db, "channels","messages");
-const q = query(ordersRef, orderBy("name","desc"));
-const querySnapshot =  getDocs(q);
-       
+
+
+      const ordersRef = collection(db, "channels");
+      const q = query(ordersRef, orderBy("timestamp", "desc"));
+      const querySnapshot =  getDocs(q);
+
+    
+        
       }
     }, [channelId]);
      
@@ -40,12 +42,12 @@ const querySnapshot =  getDocs(q);
     const sendMessage = (e) =>{
       e.preventDefault();
 
-    db.collection('channels').doc(channelId).collection('messages').add({
+     /*db.collection('channels').doc(channelId).collection('messages').add({
       timestamp: firebase.firestore.FieldValue.serverTimestamp() ,
       message: input,
       user: user,
 
-    });
+    }); */
 
     setInput("");
   };
